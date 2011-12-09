@@ -48,8 +48,8 @@ class CompaniesPage_Controller extends Page_Controller {
 		//$state->Pagination->Page = 3;
 		$state->Pagination->ItemsPerPage = 20;
 		$state->Sorting->Order = new stdClass();
-		$state->Sorting->Order->Name = 'desc';
-		$state->Sorting->Order->Otherfield = 'desc';
+		$state->Sorting->Order->President = 'desc';
+		$state->Sorting->Order->Group = 'desc';
 
 		return new Form(
 			$this,

@@ -7,12 +7,12 @@ class Company extends DataObject {
 	 * @var array
 	 */
 	public static $db = array(
-		'Name'=>'Varchar(255)',
+		'President'=>'Varchar(255)',
 		'URL'=>'Varchar(255)',
-		'Otherfield'=>'Varchar(255)',
+		'Group'=>'Varchar(255)',
 	);
 
-	public static $summary_fields = array('Name', 'URL', 'Otherfield');
+	public static $summary_fields = array('President', 'URL', 'Group');
 
 	public function requireDefaultRecords() {
 		parent::requireDefaultRecords();
@@ -22,16 +22,16 @@ class Company extends DataObject {
 		if (!$companySet->count()) {
 			foreach ($companies as $company) {
 				$docompany = new Company(array(
-							'Name'=>$company,
-							'URL'=>sha1($company.microtime(true)),
-							'Otherfield'=>sha1(microtime(true))
-						));
+						'President'=>$company,
+						'URL'=>sha1($company.microtime(true)),
+						'Group'=>rand(1,5)
+					));
 				$docompany->write();
 			}
 		} else {
 			foreach ($companySet as $company) {
-				$company->URL = sha1($company);
-				$company->Otherfield = sha1($company);
+				$company->URL = sha1($company.microtime(true));
+				$company->Group = rand(1, 5);
 				$company->write();
 			}
 		}
