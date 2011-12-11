@@ -36,14 +36,25 @@ class CompaniesPage_Controller extends Page_Controller {
 	 * @return Form 
 	 */
 	public function Companies(){
-		GridFieldPresenter::add_extension('GridFieldPaginator_Extension');
-		$presenter = new GridFieldPresenter();
-		$presenter->paginationLimit(20);
-		$grid = new GridField('Companies', 'Companies', new DataList('Company'), null, $presenter);
-		$grid->setDefaultState('Sort', array('Name' => 'desc','Otherfield' => 'asc'));
-		$grid->setDefaultState('Page', 3);
-		
-		return new Form($this, 'Companies', new FieldList($grid), new FieldList(new FormAction('reload', 'Reload')));
+		$grid = new GridField('Companies', 'Companies', new DataList('Company'), null);
+
+		$state = $grid->getState();
+
+		$state->Pagination->Page = 3;
+		$state->Pagination->ItemsPerPage = 20;
+		$state->Sorting->Order = new stdClass();
+		$state->Sorting->Order->Name = 'desc';
+		$state->Sorting->Order->Otherfield = 'desc';
+
+		return new GridFieldForm(
+			$this,
+			'Companies',
+			new FieldList(
+				$grid,
+				new TextField('ExampleTwo', 'Example Two')
+			),
+			new FieldList(new FormAction('reload', 'Reload'))
+		);
 	}
 
 	/**
