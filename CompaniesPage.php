@@ -31,22 +31,27 @@ class CompaniesPage_Controller extends Page_Controller {
 	 */
 	public $Title = "Companies";
 	
+	public function init(){
+		Requirements::javascript(SAPPHIRE_DIR.'/thirdparty/jquery/jquery.js');
+		parent::init();
+	}
+	
 	/**
 	 *
 	 * @return Form 
 	 */
 	public function Companies(){
-		$grid = new GridField('Companies', 'Companies', new DataList('Company'), null);
+		$grid = new GridField('Companies', 'Companies', new DataList('Company'));
 
 		$state = $grid->getState();
-
-		$state->Pagination->Page = 3;
+		
+		//$state->Pagination->Page = 3;
 		$state->Pagination->ItemsPerPage = 20;
 		$state->Sorting->Order = new stdClass();
 		$state->Sorting->Order->Name = 'desc';
 		$state->Sorting->Order->Otherfield = 'desc';
 
-		return new GridFieldForm(
+		return new Form(
 			$this,
 			'Companies',
 			new FieldList(
