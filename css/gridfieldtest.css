@@ -27,14 +27,9 @@ table.ss-gridfield {
 	background: #fff;
 }
 
-.ss-gridfield thead th.extra.last div.fieldgroup-field {
+.ss-gridfield thead th.extra.last div{
 	display:inline-block;
-}
-
-.ss-gridfield thead th.extra.last button {
-	margin-left: 10px;
-	position: relative;
-	top: -10px;
+	
 }
 
 .ss-gridfield thead th button {
@@ -45,6 +40,14 @@ table.ss-gridfield {
 	padding: 0;
 	width: auto;
 	text-shadow: none;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.ss-gridfield thead th.extra.last button {
+	margin-left: 10px;
+	position: relative;
+	top: -10px;
 }
 
 .ss-gridfield tbody td {
