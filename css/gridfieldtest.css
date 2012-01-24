@@ -16,9 +16,6 @@ table.ss-gridfield {
 
 .ss-gridfield thead th.extra  {
 	padding: 0 0 2px 5px;
-	position: relative;
-	top: -8px;
-	
 }
 
 .ss-gridfield thead th.extra input.ss-gridfield-sort.text {
@@ -30,9 +27,14 @@ table.ss-gridfield {
 	background: #fff;
 }
 
-.ss-gridfield thead th.extra.last div {
-	display: inline;
-	
+.ss-gridfield thead th.extra.last div.fieldgroup-field {
+	display:inline-block;
+}
+
+.ss-gridfield thead th.extra.last button {
+	margin-left: 10px;
+	position: relative;
+	top: -10px;
 }
 
 .ss-gridfield thead th button {
@@ -47,7 +49,17 @@ table.ss-gridfield {
 
 .ss-gridfield tbody td {
 	border-bottom: 1px solid #929292;
+	border-right: 1px solid #929292;
 	padding: 5px;
+}
+
+.ss-gridfield tbody td:last-child {
+	border-right:0;
+}
+
+.ss-gridfield tbody tr.odd td {
+	background: #f7f7f7;
+	color: #000;
 }
 
 .ss-gridfield tbody td.first {
