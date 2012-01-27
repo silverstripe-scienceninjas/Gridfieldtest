@@ -12,9 +12,36 @@ class Company extends DataObject {
 		'Revenue'=>'Float',
 		'CEO'=>'Varchar(255)',
 	);
+	
+	public static $has_many  = array(
+		'Employees' => 'Employee'
+	);
 
 	public static $summary_fields = array('Name', 'Category', 'Revenue', 'CEO');
 
+	
+	public function getCMSFields($controller, $formName) {
+		$fields = new FieldList();
+		$fields->add(new TextField('Name', 'Name', $this->Name));
+		$fields->add(new TextField('Category', 'Category', $this->Category));
+		$fields->add(new TextField('Revenue', 'Revenue', $this->Revenue));
+		$fields->add(new TextField('CEO', 'CEO', $this->CEO));
+		
+		$config = new GridFieldConfig();
+		$config->addComponent(new GridFieldRelationAdd('Name'));
+		$config->addComponent(new GridFieldDefaultColumns());
+		$config->addComponent(new GridFieldSortableHeader());
+		$config->addComponent(new GridFieldPaginator());
+		$config->addComponent(new GridFieldAction_Edit());
+		$config->addComponent(new GridFieldRelationDelete());
+		// Add popup controller for edit / view links
+		$config->addComponent(new GridFieldPopupForms($controller, $formName ));
+		
+		$gridField = new GridField('Employees', 'Employees', $this->Employees(), $config);
+		$fields->add($gridField);
+		return $fields;
+	}
+	
 	public function requireDefaultRecords() {
 		parent::requireDefaultRecords();
 		$companySet = DataObject::get('Company');
