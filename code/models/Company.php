@@ -40,18 +40,10 @@ class Company extends DataObject {
 		$fields->add(new TextField('Revenue', 'Revenue', $this->Revenue));
 		$fields->add(new TextField('CEO', 'CEO', $this->CEO));
 		
-		$config = new GridFieldConfig();
-		$config->addComponent(new GridFieldRelationAdd('Name'));
-		$config->addComponent(new GridFieldDefaultColumns());
-		$config->addComponent(new GridFieldSortableHeader());
-		$config->addComponent(new GridFieldPaginator());
-		$config->addComponent(new GridFieldAction_Edit());
-		$config->addComponent(new GridFieldRelationDelete());
-		// Add popup controller for edit / view links
-		$config->addComponent(new GridFieldPopupForms($controller, $formName ));
-		
-		$gridField = new GridField('Employees', 'Employees', $this->Employees(), $config);
-		$fields->add($gridField);
+		#$config = new GridFieldConfig_ManyManyEditor("Name", true, 5);
+		#$config->addComponent(new GridFieldPopupForms($controller, $formName ));
+		#$gridField = new GridField('Employees', 'Employees', $this->Employees(), $config);
+		#$fields->add($gridField);
 		return $fields;
 	}
 
