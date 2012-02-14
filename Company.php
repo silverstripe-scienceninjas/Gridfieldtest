@@ -12,14 +12,27 @@ class Company extends DataObject {
 		'Revenue'=>'Float',
 		'CEO'=>'Varchar(255)',
 	);
-	
+
+	/**
+	 *
+	 * @var array
+	 */
 	public static $has_many  = array(
 		'Employees' => 'Employee'
 	);
 
+	/**
+	 *
+	 * @var array
+	 */
 	public static $summary_fields = array('Name', 'Category', 'Revenue', 'CEO');
 
-	
+	/**
+	 *
+	 * @param type $controller
+	 * @param type $formName
+	 * @return FieldList 
+	 */
 	public function getCMSFields($controller, $formName) {
 		$fields = new FieldList();
 		$fields->add(new TextField('Name', 'Name', $this->Name));
@@ -41,7 +54,10 @@ class Company extends DataObject {
 		$fields->add($gridField);
 		return $fields;
 	}
-	
+
+	/**
+	 * Delete all previous data and inserts the default company records
+	 */
 	public function requireDefaultRecords() {
 		parent::requireDefaultRecords();
 		$companySet = DataObject::get('Company');
@@ -57,7 +73,7 @@ class Company extends DataObject {
 			$company->CEO = $companyData[3];
 			$company->write();
 		}
-		DB::alteration_message("Added default records to Company table","created");
+		DB::alteration_message("Added default records to Company table", "created");
 	}
 
 	/**

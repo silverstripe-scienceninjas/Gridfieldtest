@@ -8,13 +8,9 @@ class CompaniesPage extends Page {
 	public function requireDefaultRecords() {
 		parent::requireDefaultRecords();
 		$page = DataObject::get_one('CompaniesPage');
-		
-		if(!$page) {
-			$page = new CompaniesPage();
-		}
-		
-		$page->URLSegment = 'companies';
-		$page->Title = 'Companies';
+		if(!$page) { $page = new CompaniesPage(); }
+		$page->URLSegment = 'forbes-500';
+		$page->Title = 'Forbes 500';
 		$page->ParentID = 0;
 		$page->write();
 		$page->doPublish();
@@ -34,6 +30,7 @@ class CompaniesPage_Controller extends Page_Controller {
 	
 	public function init(){
 		parent::init();
+		$this->Title = 'Forbes 500';
 		Requirements::javascript(SAPPHIRE_DIR.'/thirdparty/jquery/jquery.js');
 		Requirements::css('gridfieldtest/css/gridfieldtest.css','screen');
 	}
@@ -46,15 +43,15 @@ class CompaniesPage_Controller extends Page_Controller {
 		$config = new GridFieldConfig();
 		$config->addComponent(new GridFieldDefaultColumns());
 		$config->addComponent(new GridFieldSortableHeader());
-		$config->addComponent(new GridFieldPaginator);
+		$config->addComponent(new GridFieldPaginator(10));
 		$config->addComponent(new GridFieldFilter());
 		$config->addComponent(new GridFieldAction_Delete());
 		
 		$config->addComponent(new CompaniesPage_ViewAction());
 		$config->addComponent(new GridFieldPopupForms($this, 'GridForm'));
 		
-		$grid = new GridField('Companies', 'Companies', new DataList('Company'),$config);
-		return new Form($this,'GridForm',new FieldList($grid),new FieldList());
+		$grid = new GridField('Companies', 'Companies', new DataList('Company'), $config);
+		return new Form($this,'GridForm', new FieldList($grid), new FieldList());
 	}
 }
 

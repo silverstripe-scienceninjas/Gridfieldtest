@@ -1,3 +1,3 @@
-<h2>Forbes 500</h2>
-
+<div class="cms">
 $GridForm
+</div>

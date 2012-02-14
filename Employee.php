@@ -5,15 +5,26 @@
  *
  */
 class Employee extends DataObject {
-	
+
+	/**
+	 *
+	 * @var array
+	 */
 	public static $db = array(
 		'Name' => 'Varchar',
 	);
-	
+
+	/**
+	 *
+	 * @var array
+	 */
 	public static $has_one = array(
 		'Company' => 'Company'
 	);
-	
+
+	/**
+	 * Delete all previous data and inserts the default company records
+	 */
 	public function requireDefaultRecords() {
 		parent::requireDefaultRecords();
 		$employeeSet = DataObject::get('Employee');
@@ -26,7 +37,7 @@ class Employee extends DataObject {
 			$employee->Name = $employeeName;
 			$employee->write();
 		}
-		DB::alteration_message("Added default records to Employee table","created");
+		DB::alteration_message("Added default records to Employee table", "created");
 	}
 	
 	/**
